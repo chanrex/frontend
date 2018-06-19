@@ -5,7 +5,9 @@
       fixed
       app
     >
-      <v-toolbar flat class="transparent">
+      <v-toolbar 
+        flat 
+        class="transparent">
         <v-list class="pa-0">
           <v-list-tile avatar>
             <v-list-tile-avatar>
@@ -19,7 +21,7 @@
       </v-toolbar>
 
       <v-list dense>
-        <v-divider></v-divider>
+        <v-divider/>
         <v-list-tile @click="">
           <v-list-tile-action>
             <v-icon>home</v-icon>

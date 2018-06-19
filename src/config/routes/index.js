@@ -21,6 +21,13 @@ export default [
     },
   },
   {
+    path: '/card-dropdown',
+    name: '',
+    component() {
+      return import('../../components/CardDropdown.vue');
+    },
+  },
+  {
     path: '/card-list',
     name: 'Card List',
     component() {

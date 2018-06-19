@@ -7,7 +7,9 @@
     <v-layout 
       row 
       wrap>
-      <v-flex xs12 md6>
+      <v-flex 
+        xs12 
+        md6>
         <v-card 
           color="white" 
           class="black--text">
@@ -61,7 +63,9 @@
         </v-card>
       </v-flex>
 
-      <v-flex xs12 md6>
+      <v-flex 
+        xs12 
+        md6>
         <v-card 
           color="white" 
           class="black--text">
@@ -115,7 +119,9 @@
         </v-card>
       </v-flex>
 
-      <v-flex xs12 md6>
+      <v-flex 
+        xs12 
+        md6>
         <v-card 
           color="white" 
           class="black--text">
