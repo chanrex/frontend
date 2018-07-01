@@ -15,6 +15,8 @@ const store = new Vuex.Store({
     },
     authors: [],
     publishers: [],
+    categorys: [],
+    bookList: [],
   },
   getters: {
     getCount: state => {
@@ -36,6 +38,8 @@ const store = new Vuex.Store({
     },
     getAuthors: state => state.authors,
     getPublishers: state => state.publishers,
+    getCategorys: state => state.categorys,
+    getBookList: state => state.bookList,
   },
   mutations: {
     increment(state) {
@@ -55,6 +59,13 @@ const store = new Vuex.Store({
     updatePublihserInfo(state, _input) {
       state.publishers = _input;
       window.sessionStorage.setItem('publishers', _input);
+    },
+    updateCategorys(state, _input) {
+      state.categorys = _input;
+      window.sessionStorage.setItem('categorys', _input);
+    },
+    updateBookList(state, _input) {
+      state.bookList = _input;
     },
   },
   actions: {
@@ -84,6 +95,18 @@ const store = new Vuex.Store({
     async loadPublishers({ commit }, _input) {
       let { status, data } = await dofetch('/publishers');
       commit('updatePublihserInfo', data);
+    },
+    async loadCategorys({ commit }) {
+      let { status, data } = await dofetch('/categorys');
+      commit('updateCategorys', data);
+    },
+    async loadBookList({ commit }) {
+      let { status, data } = await dofetch('/books');
+      commit('updateBookList', data);
+    },
+    async purchaseBook({ commit }, _input) {
+      let { status, data } = await dofetch('/purchase', 'POST', _input);
+      return true;
     },
   },
 });

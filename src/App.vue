@@ -37,7 +37,7 @@
         </v-list-tile>
 
 
-         <v-list-tile 
+        <v-list-tile 
           v-else
           @click="logout()"
         >
@@ -63,13 +63,12 @@
           @click="$router.push('/my-book')"
         >
           <v-list-tile-action>
-            <v-icon>dashboard</v-icon>
+            <v-icon>shopping_cart</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>My book</v-list-tile-title>
+            <v-list-tile-title>My purchase</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-
 
         <v-list-tile
           v-show="logined" 
@@ -105,7 +104,6 @@
       app>
       <span class="white--text">&copy; 2017</span>
     </v-footer>
-
     
   </v-app>
 </template>
@@ -126,18 +124,18 @@ export default {
     },
     userEmail: function() {
       return this.$store.getters.getUserEmail;
-    }
-  },
-  methods: {
-    logout() {
-      window.sessionStorage.clear();
-      location.replace('/signin')
     },
   },
   mounted() {
     this.$store.dispatch('loadAuthors');
     this.$store.dispatch('loadPublishers');
-    
-  }
+    this.$store.dispatch('loadCategorys');
+  },
+  methods: {
+    logout() {
+      window.sessionStorage.clear();
+      location.replace('/signin');
+    },
+  },
 };
 </script>
