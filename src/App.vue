@@ -5,7 +5,8 @@
       fixed
       app
     >
-      <v-toolbar 
+      <v-toolbar
+        v-show="logined" 
         flat 
         class="transparent">
         <v-list class="pa-0">
@@ -14,7 +15,7 @@
               <img src="https://randomuser.me/api/portraits/men/85.jpg" >
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title>John Leider</v-list-tile-title>
+              <v-list-tile-title>{{ userEmail }}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -22,22 +23,66 @@
 
       <v-list dense>
         <v-divider/>
-        <v-list-tile @click="">
+
+        <v-list-tile 
+          v-if="!logined"
+          @click="$router.push('/signin')"
+        >
           <v-list-tile-action>
-            <v-icon>home</v-icon>
+            <v-icon>info</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
+            <v-list-tile-title>Sign In</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="">
+
+
+         <v-list-tile 
+          v-else
+          @click="logout()"
+        >
           <v-list-tile-action>
-            <v-icon>contact_mail</v-icon>
+            <v-icon>reply</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Contact</v-list-tile-title>
+            <v-list-tile-title>Sign Out</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+
+        <v-list-tile @click="$router.push('/book-list')">
+          <v-list-tile-action>
+            <v-icon>receipt</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Book List</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile
+          v-show="logined" 
+          @click="$router.push('/my-book')"
+        >
+          <v-list-tile-action>
+            <v-icon>dashboard</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>My book</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+
+        <v-list-tile
+          v-show="logined" 
+          @click="$router.push('/book-add')"
+        >
+          <v-list-tile-action>
+            <v-icon>add_circle_outline</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Add Book</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
       </v-list>
     </v-navigation-drawer>
 
@@ -75,5 +120,24 @@ export default {
     dialog2: false,
     items: ['All', 'Family', 'Friends', 'Coworkers'],
   }),
+  computed: {
+    logined: function() {
+      return this.$store.getters.getIfLogin;
+    },
+    userEmail: function() {
+      return this.$store.getters.getUserEmail;
+    }
+  },
+  methods: {
+    logout() {
+      window.sessionStorage.clear();
+      location.replace('/signin')
+    },
+  },
+  mounted() {
+    this.$store.dispatch('loadAuthors');
+    this.$store.dispatch('loadPublishers');
+    
+  }
 };
 </script>

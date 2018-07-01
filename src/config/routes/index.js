@@ -1,9 +1,23 @@
 export default [
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component() {
+  //     return import('../../components/Home.vue');
+  //   },
+  // },
   {
-    path: '/',
-    name: 'Home',
+    path: '/book-list',
+    name: 'Book List',
     component() {
-      return import('../../components/Home.vue');
+      return import('../../components/BookList.vue');
+    },
+  },
+  {
+    path: '/book-add',
+    name: 'Book Add',
+    component() {
+      return import('../../components/AddBook.vue');
     },
   },
   {

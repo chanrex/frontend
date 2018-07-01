@@ -69,6 +69,8 @@ export default {
         .then(output => {
           if (output) {
             console.log('signIn success');
+            // this.$router.push('/book-list'); // got some problem
+            location.replace('/book-list');
           } else {
             console.log('signIn failed');
           }

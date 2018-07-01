@@ -9,11 +9,12 @@ const store = new Vuex.Store({
   state: {
     count: 20,
     user: {
-      user_name: '',
-      user_email: '',
-      id: '',
-      user_id: '',
+      user_name: window.sessionStorage.getItem('name'),
+      user_email: window.sessionStorage.getItem('email'),
+      id: window.sessionStorage.getItem('user_id'),
     },
+    authors: [],
+    publishers: [],
   },
   getters: {
     getCount: state => {
@@ -23,12 +24,18 @@ const store = new Vuex.Store({
       return state.user.id;
     },
     getIfLogin: state => {
-      if (state.user.user_name != '' && state.user.user_email != '') {
+      console.log(state.user);
+      if (state.user.user_name || state.user.user_email) {
         return true;
       } else {
         return false;
       }
     },
+    getUserEmail: state => {
+      return state.user.user_email ? state.user.user_email : '';
+    },
+    getAuthors: state => state.authors,
+    getPublishers: state => state.publishers,
   },
   mutations: {
     increment(state) {
@@ -36,7 +43,18 @@ const store = new Vuex.Store({
     },
     updateUserInfo(state, _input) {
       state.user = Object.assign({}, ..._input);
-      console.log(state.user);
+      console.log(_input);
+      window.sessionStorage.setItem('name', _input.user_name);
+      window.sessionStorage.setItem('email', _input.user_email);
+      window.sessionStorage.setItem('user_id', _input.id);
+    },
+    updateAuthorInfo(state, _input) {
+      state.authors = _input;
+      window.sessionStorage.setItem('authors', _input);
+    },
+    updatePublihserInfo(state, _input) {
+      state.publishers = _input;
+      window.sessionStorage.setItem('publishers', _input);
     },
   },
   actions: {
@@ -53,6 +71,19 @@ const store = new Vuex.Store({
       } else {
         return false;
       }
+    },
+    async addBook({ commit }, _input) {
+      let { status, data } = await dofetch('/addBook', 'POST', _input);
+      console.log(status, data);
+      return true;
+    },
+    async loadAuthors({ commit }, _input) {
+      let { status, data } = await dofetch('/authors');
+      commit('updateAuthorInfo', data);
+    },
+    async loadPublishers({ commit }, _input) {
+      let { status, data } = await dofetch('/publishers');
+      commit('updatePublihserInfo', data);
     },
   },
 });
