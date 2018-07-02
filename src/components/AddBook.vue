@@ -121,9 +121,7 @@ export default {
       return this.$store.getters.getPublishers;
     },
     categoryOptions: function() {
-      let output = this.$store.getters.getCategorys;
-      console.log(output);
-      return output;
+      return this.$store.getters.getCategorys;
     },
   },
   methods: {
@@ -145,10 +143,7 @@ export default {
       console.log(data);
       this.$store.dispatch('addBook', data).then(output => {
         if (output) {
-          console.log(output);
-          // console.log('signIn success');
-          // this.$router.push('/book-list'); // got some problem
-          // location.replace('/book-list');
+          this.$router.push('/book-list');       
         }
       });
     },

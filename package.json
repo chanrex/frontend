@@ -27,6 +27,7 @@
     "babel-runtime": "^6.26.0",
     "bignumber.js": "^7.2.1",
     "http-server": "^0.11.1",
+    "moment-timezone": "^0.5.21",
     "vue": "^2.5.3",
     "vue-router": "^3.0.1",
     "vuetify": "^1.0.0",

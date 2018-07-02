@@ -21,6 +21,13 @@ export default [
     },
   },
   {
+    path: '/my-book',
+    name: 'My Book',
+    component() {
+      return import('../../components/MyBook.vue');
+    },
+  },
+  {
     path: '/book-add',
     name: 'Book Add',
     component() {

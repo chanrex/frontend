@@ -64,12 +64,12 @@
             <v-card-actions>
               <v-btn
                 v-show="userId != book.user_id && !book.sold"
-                @click="openConfirm(book.book_id)"
-                flat 
-                color="purple">Buy</v-btn>
+                flat
+                color="purple" 
+                @click="openConfirm(book.book_id)">Buy</v-btn>
               <v-btn 
-                disabled
                 v-show="book.sold"
+                disabled
                 flat
                 color="red"
               >
@@ -135,13 +135,12 @@ export default {
       let data = {
         buyer_id: this.userId,
         book_id: this.confirmId,
-      }
-      this.$store.dispatch('purchaseBook', data)
-        .then(input => {
-          if (input) {
-            this.$router.go(0);
-          }
-        })
+      };
+      this.$store.dispatch('purchaseBook', data).then(input => {
+        if (input) {
+          this.$router.go(0);
+        }
+      });
     },
   },
 };

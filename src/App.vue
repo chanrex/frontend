@@ -72,6 +72,18 @@
 
         <v-list-tile
           v-show="logined" 
+          @click="$router.push('/my-book')"
+        >
+          <v-list-tile-action>
+            <v-icon>local_library</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>My Book</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile
+          v-show="logined" 
           @click="$router.push('/book-add')"
         >
           <v-list-tile-action>
@@ -130,6 +142,8 @@ export default {
     this.$store.dispatch('loadAuthors');
     this.$store.dispatch('loadPublishers');
     this.$store.dispatch('loadCategorys');
+    this.$store.dispatch('loadMyBook');
+    this.$store.dispatch('loadMyPurchase');
   },
   methods: {
     logout() {

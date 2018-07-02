@@ -5,7 +5,15 @@
       style="min-height: 0;"
       grid-list-lg
     >
-
+      <v-layout
+        v-show="books.length == 0"
+        row
+        wrap
+      >
+        <v-flex xs12>
+          <h1>You now have no purchase</h1>
+        </v-flex>
+      </v-layout>
       <v-layout 
         row 
         wrap>
