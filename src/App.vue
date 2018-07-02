@@ -60,7 +60,7 @@
 
         <v-list-tile
           v-show="logined" 
-          @click="$router.push('/my-book')"
+          @click="$router.push('/my-purchase')"
         >
           <v-list-tile-action>
             <v-icon>shopping_cart</v-icon>

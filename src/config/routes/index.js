@@ -14,6 +14,13 @@ export default [
     },
   },
   {
+    path: '/my-purchase',
+    name: 'My Purchase',
+    component() {
+      return import('../../components/Purchase.vue');
+    },
+  },
+  {
     path: '/book-add',
     name: 'Book Add',
     component() {

@@ -17,6 +17,7 @@ const store = new Vuex.Store({
     publishers: [],
     categorys: [],
     bookList: [],
+    myPurchase: [],
   },
   getters: {
     getCount: state => {
@@ -40,6 +41,7 @@ const store = new Vuex.Store({
     getPublishers: state => state.publishers,
     getCategorys: state => state.categorys,
     getBookList: state => state.bookList,
+    getMyPurchase: state => state.myPurchase,
   },
   mutations: {
     increment(state) {
@@ -66,6 +68,9 @@ const store = new Vuex.Store({
     },
     updateBookList(state, _input) {
       state.bookList = _input;
+    },
+    updateMyPurchase(state, _input) {
+      state.myPurchase = _input;
     },
   },
   actions: {
@@ -107,6 +112,11 @@ const store = new Vuex.Store({
     async purchaseBook({ commit }, _input) {
       let { status, data } = await dofetch('/purchase', 'POST', _input);
       return true;
+    },
+    async loadMyPurchase({ getters, commit }) {
+      let user_id = getters.getUserId;
+      let { status, data } = await dofetch(`/myPurchase/${user_id}`);
+      commit('updateMyPurchase', data);
     },
   },
 });
